@@ -8,12 +8,12 @@ ymin=-0.7505;
 zmin=-1.2236;
 tempmin=double(t(xmin,ymin,zmin))
 
-xmax=3.5551;
-ymax=0.6003;
-zmax=1.5883;
+xmax=3.5963;
+ymax=-2.0459;
+zmax=0.1796;
 tempmax=double(t(xmax,ymax,zmax))
 
-xpoint=4;
+xpoint=;
 ypoint=-0.3;
 zpoint=0.1675;
-temppoint=double(t(xpoint,ypoint,zpoint))
+temppoit=double(t(xpoint,ypoint,zpoint))
