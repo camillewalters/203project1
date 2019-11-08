@@ -12,7 +12,6 @@ maxslope=0;
 maxx=0;
 maxy=0;
 
-dGradient =d
 
 for i= 1:0.05:5.5
     for j= -4:0.05:3

@@ -3,7 +3,6 @@ clc
 syms x y
 
 z(x,y)=0.00125.*exp(-((x-3).^2+0.5.*y.^2)).*(sin(2.*x)+2.*sin(0.75*(0.5*y-2).^2)).*(16.*x+64.*x.^2+y.^2);
-
 A(x,y)=diff(diff(z,x),x);
 B(x,y)=diff(diff(z,x),y);
 C(x,y)=diff(diff(z,y),y);

@@ -1,0 +1,21 @@
+clear all 
+clc
+
+function F=lagrange(x)
+syms x y z lambda
+%function to optimize
+t=-0.1.*(0.00125.*exp(-((x-3).^2+0.5.*y.^2)).*(sin(2.*x)+2.*sin(0.75*(0.5*y-2).^2)).*(16.*x+64.*x.^2+y.^2)).^2+17*exp(-0.1.*((0.1.*x-2)-(0.05.*y-1).^2-((0.00125.*exp(-((x-3).^2+0.5.*y.^2)).*(sin(2.*x)+2.*sin(0.75*(0.5*y-2).^2)).*(16.*x+64.*x.^2+y.^2))-1).^2))-10;
+%constraint
+C=0.00125.*exp(-((x-3).^2+0.5.*y.^2)).*(sin(2.*x)+2.*sin(0.75*(0.5*y-2).^2)).*(16.*x+64.*x.^2+y.^2)-z==0;
+%lagrange equation
+L=t+lambda.*lhs(C);
+%partial derivatives
+dx=diff(L,x)==0
+dy=diff(L,y)==0
+dz=diff(L,z)==0
+dl=diff(L,lambda)==0
+%system of equations
+sys=[dx, dy, dz, dl];
+%solving
+[xVal, yVal, zVal, lVal]=solve(sys, [x y z lambda], 'Real', true)
+
