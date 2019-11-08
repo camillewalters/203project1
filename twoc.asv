@@ -9,16 +9,16 @@ t(x,y,z)=-0.1.*z.^2+17*exp(-0.1.*((0.1.*x-2)-(0.05.*y-1).^2-(z-1).^2))-10;
 dx(x,y)=diff(z,x);
 dy(x,y)=diff(z,y);
 
-%northwest direction unit vector
+%northwest direction
 i1=-1./sqrt(2);
 j1=1./sqrt(2);
 
-%southwest direction unit vector
+%southwest direction
 i2=-1./sqrt(2);
 j2=-1./sqrt(2); 
 
-%directional derivative of the function going north west
+%directional derivative north west
 ddnw=double((i1.*dx(4,-0.3))+(j1.*dy(4,-0.3)))
 
-%directional derivative of the function going south west
+%directional derivative south west
 ddsw=double((i2.*dx(4,-0.3))+(j2.*dy(4,-0.3)))
