@@ -1,5 +1,10 @@
 clear all
 clc
+
+%displaying first derivative
+disp(diff(z,x))
+disp(diff(z,y))
+
 %initial guesses based on contour plot
 x0 = [3,-1];
 x1 = [3.5,-2];
