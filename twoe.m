@@ -9,7 +9,8 @@ z=0.00125.*exp(-((x-3).^2+0.5.*y.^2)).*(sin(2.*x)+2.*sin(0.75*(0.5*y-2).^2)).*(1
 t=-0.1.*z.^2+17*exp(-0.1.*((0.1.*x-2)-(0.05.*y-1).^2-(z-1).^2))-10;
 
 surf(x,y,t)
-title("T in Terms of X and Y")
-xlabel('x')
-ylabel('y')
-zlabel('T')
+title("Temperature")
+xlabel('x (km)')
+ylabel('y (km)')
+zlabel('T (Celsius)')
+colorbar

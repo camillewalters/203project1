@@ -1,7 +1,7 @@
 clear all
 clc
 %initial guess based on plot from part e
-x0=[2.9 -0.8 -1.2163 1.2163]
+x0=[2.9 -0.8 -1.2163 0]
 [x, fval]=fsolve(@solution, x0)
 
 
