@@ -18,6 +18,7 @@ j1=1./sqrt(2);
 i2=-1./sqrt(2);
 j2=-1./sqrt(2); 
 
+dis
 
 %directional derivative of the function going north west
 ddnw=double((i1.*dx(4,-0.3))+(j1.*dy(4,-0.3)))
