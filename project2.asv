@@ -1,6 +1,21 @@
 close all
 clc
 
+syms x y
+%PART 1
+%part I
+z=sqrt(0.25^2-x^2-y^2);
+fsurf(z)
+hold on
+fsurf(-z);
+hold on
+z=sqrt(x^2+y^2-r)
+fsurf(z);
+hold on
+z=
+
+
+
 % 
 % %case1
 % R=0.25
@@ -15,25 +30,6 @@ T=0.02;
 H=0.275;
 PHI=45;
 D=0.035;
-
-syms x y
-%PART 1
-%part I
-z=sqrt(0.25^2-x^2-y^2);
-fsurf(z)
-hold on
-fsurf(-z);
-hold on
-% z=sqrt(x^2+y^2-r)
-% fsurf(z);
-% hold on
-z=sqrt(x^2+y^2)*tan(PHI*pi/180)
-fsurf(z);
-UL=H*tan(PHI*pi/180)
-zlim([-R UL]);
-hold on;
-
-
 
 syms r theta z real
 %solving for body volume
