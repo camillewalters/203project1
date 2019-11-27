@@ -2,34 +2,34 @@ close all
 clc
 
 
-%case1
-R=0.25
-T=0.02;
-H=0.150;
-PHI=30;
-D=0.015;
-
-% %case2
-% R=0.4;
+% %case1
+% R=0.25;
 % T=0.02;
-% H=0.275;
-% PHI=45;
-% D=0.035;
+% H=0.150;
+% PHI=30;
+% D=0.015;
+
+%case2
+R=0.4;
+T=0.02;
+H=0.275;
+PHI=45;
+D=0.035;
 
 syms x y
 %PART 1
-%part I
-axis equal
-z=sqrt(0.4^2-x^2-y^2);
-fsurf(z)
-hold on
-fsurf(-z);
-hold on
-z=sqrt(x^2+y^2)*tan(PHI*pi/180)
-fsurf(z);
-UL=H*tan(PHI*pi/180)
-zlim([-R UL]);
-hold on;
+% %part I
+% axis equal
+% z=sqrt(R^2-x^2-y^2);
+% fsurf(z)
+% hold on
+% fsurf(-z);
+% hold on
+% z=sqrt(x^2+y^2)*tan(PHI*pi/180)
+% fsurf(z+R-D-C1);
+% % UL=H*tan(PHI*pi/180)
+% % zlim([-R (UL+R)]);
+% hold on;
 
 
 
@@ -75,17 +75,32 @@ density=250+14*(cos((theta+90)*pi/180)-sin(theta*pi/180));
 
 I16=int(density,z,0,sqrt(H^2-r^2));%z integral 
 I17=int(I16,r,0,H);%r integral 
-I18=int(I17,theta,0,2*Pi);%theta integral 
-MassHead=double(I18)
+I18=int(I17,theta,0,Pi);%theta integral 
+MassHead=double(2*I18)
 
-%z moment of intertia and yBar
-I22=int(r*sin(theta*pi/180)*density,z,0,sqrt(H^2-r^2));
+%z moment of intertia and zBar
+I22=int(r*z*density,z,0,sqrt(H^2-r^2));
 I23=int(I19,r,0,H);
-I24=int(I20,theta,0,2*Pi);
-yMI=double(I24)
-yBar=double(I24/I18)
+I24=2*int(I20,theta,0,Pi);
+zMI=double(I24)
+zBar=double(I24/I18)
+%theta is the same but we can onlygo from 0 to pi. use zrdrdzdtheta to get
+%the right values
 
+%finding composite centers of mass
 
+% %Case 1 (ensure that case 1 values are uncommented above)
+% xBarBody1=-0.225*50/(volBody*325+50)
+% zBarBody1=-0.1*50/(volBody*325+50)
+% xBarTotal1=(xBarBody1*(volBody*325+50))/(volBody*325+50+MassHead)
+% zBarTotal1=(zBarBody1*(volBody*325+50)+zBar*MassHead)/(volBody*325+50+MassHead)
 
+%Case 2 (ensure that case 2 values are uncommented above)
+xBarBody2=-0.375*50/(volBody*325+50)
+zBarBody2=-0.125*50/(volBody*325+50)
+xBarTotal2=(xBarBody2*(volBody*325+50))/(volBody*325+50+MassHead)
+zBarTotal2=(zBarBody2*(volBody*325+50)+zBar*MassHead)/(volBody*325+50+MassHead)
 
+%NetTorque1=(volBody*325+50+MassHead)*9.81*xBarTotal1-(volBody*325+50+MassHead)*9.81*zBarTotal1
+NetTorque2=(volBody*325+50+MassHead)*9.81*xBarTotal2-(volBody*325+50+MassHead)*9.81*zBarTotal2
 
