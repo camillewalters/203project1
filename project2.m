@@ -17,7 +17,7 @@ PHI=45;
 D=0.035;
 
 syms x y
-%PART 1
+% %PART 1
 % %part I
 % axis equal
 % z=sqrt(R^2-x^2-y^2);
@@ -25,10 +25,10 @@ syms x y
 % hold on
 % fsurf(-z);
 % hold on
-% z=sqrt(x^2+y^2)*tan(PHI*pi/180)
-% fsurf(z+R-D-C1);
-% % UL=H*tan(PHI*pi/180)
-% % zlim([-R (UL+R)]);
+% z=sqrt(x^2+y^2)*tan(PHI*pi/180);
+% fsurf(z+R-D-(sqrt(R^2-(R-D)^2)*tan(PHI*pi/180)));%-C1
+% UL=H*tan(PHI*pi/180);
+% zlim([-R H*tan(PHI*pi/180)+R-D-(sqrt(R^2-(R-D)^2)*tan(PHI*pi/180))]);
 % hold on;
 
 
@@ -71,24 +71,22 @@ Vtotal=volBody+volHead+volNeck-volSock
 
 %mass of head
 
-density=250+14*(cos((theta+90)*pi/180)-sin(theta*pi/180));
+density=250+14*(cos(theta-pi/2)-sin(theta));
 
-I16=int(density,z,0,sqrt(H^2-r^2));%z integral 
-I17=int(I16,r,0,H);%r integral 
-I18=int(I17,theta,0,Pi);%theta integral 
-MassHead=double(2*I18)
+I16=int(density*r^2*sin(theta),r,0,H);%z integral 
+I17=int(I16,theta,0,pi);%theta integral 
+zMI=double(I17)
 
 %z moment of intertia and zBar
-I22=int(r*z*density,z,0,sqrt(H^2-r^2));
-I23=int(I19,r,0,H);
-I24=2*int(I20,theta,0,Pi);
-zMI=double(I24)
-zBar=double(I24/I18)
+I22=int(r*density,r,0,H);
+I23=int(I22,theta,0,pi);
+MassHead=double(I23)
+zBar=double((I17/I23)+R)
 %theta is the same but we can onlygo from 0 to pi. use zrdrdzdtheta to get
 %the right values
 
 %finding composite centers of mass
-
+% 
 % %Case 1 (ensure that case 1 values are uncommented above)
 % xBarBody1=-0.225*50/(volBody*325+50)
 % zBarBody1=-0.1*50/(volBody*325+50)
