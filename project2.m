@@ -17,19 +17,19 @@ PHI=45;
 D=0.035;
 
 syms x y
-% %PART 1
-% %part I
-% axis equal
-% z=sqrt(R^2-x^2-y^2);
-% fsurf(z)
-% hold on
-% fsurf(-z);
-% hold on
-% z=sqrt(x^2+y^2)*tan(PHI*pi/180);
-% fsurf(z+R-D-(sqrt(R^2-(R-D)^2)*tan(PHI*pi/180)));%-C1
-% UL=H*tan(PHI*pi/180);
-% zlim([-R H*tan(PHI*pi/180)+R-D-(sqrt(R^2-(R-D)^2)*tan(PHI*pi/180))]);
-% hold on;
+%PART 1
+%part I
+axis equal
+z=sqrt(R^2-x^2-y^2);
+fsurf(z)
+hold on
+fsurf(-z);
+hold on
+z=sqrt(x^2+y^2)*tan(PHI*pi/180);
+fsurf(z+R-D-(sqrt(R^2-(R-D)^2)*tan(PHI*pi/180)));%-C1
+UL=H*tan(PHI*pi/180);
+zlim([-R H*tan(PHI*pi/180)+R-D-(sqrt(R^2-(R-D)^2)*tan(PHI*pi/180))]);
+hold on;
 
 
 
@@ -81,24 +81,26 @@ zMI=double(I17)
 I22=int(r*density,r,0,H);
 I23=int(I22,theta,0,pi);
 MassHead=double(I23)
-zBar=double((I17/I23)+R)
+zBar=double((I17/I23)+(R-D)+(H/2-sqrt(R^2-(R-D)^2))*tan(PHI*pi/180))
 %theta is the same but we can onlygo from 0 to pi. use zrdrdzdtheta to get
 %the right values
 
 %finding composite centers of mass
-% 
+
+massBody=volBody*325;
+
 % %Case 1 (ensure that case 1 values are uncommented above)
-% xBarBody1=-0.225*50/(volBody*325+50)
-% zBarBody1=-0.1*50/(volBody*325+50)
-% xBarTotal1=(xBarBody1*(volBody*325+50))/(volBody*325+50+MassHead)
-% zBarTotal1=(zBarBody1*(volBody*325+50)+zBar*MassHead)/(volBody*325+50+MassHead)
-
+% xBarBody1=-0.225*50/(massBody+50)
+% zBarBody1=-0.1*50/(massBody+50)
+% xBarTotal1=(xBarBody1*(massBody+50))/(massBody+50+MassHead)
+% zBarTotal1=(zBarBody1*(massBody+50)+zBar*MassHead)/(massBody+50+MassHead)
+% % 
 %Case 2 (ensure that case 2 values are uncommented above)
-xBarBody2=-0.375*50/(volBody*325+50)
-zBarBody2=-0.125*50/(volBody*325+50)
-xBarTotal2=(xBarBody2*(volBody*325+50))/(volBody*325+50+MassHead)
-zBarTotal2=(zBarBody2*(volBody*325+50)+zBar*MassHead)/(volBody*325+50+MassHead)
+xBarBody2=-0.375*50/(massBody+50)
+zBarBody2=-0.125*50/(massBody+50)
+xBarTotal2=(xBarBody2*(massBody+50))/(massBody+50+MassHead)
+zBarTotal2=(zBarBody2*(massBody+50)+zBar*MassHead)/(massBody+50+MassHead)
 
-%NetTorque1=(volBody*325+50+MassHead)*9.81*xBarTotal1-(volBody*325+50+MassHead)*9.81*zBarTotal1
-NetTorque2=(volBody*325+50+MassHead)*9.81*xBarTotal2-(volBody*325+50+MassHead)*9.81*zBarTotal2
+%NetTorque1=(massBody+50+MassHead)*9.81*abs(xBarTotal1)-0.25*((massBody+50+MassHead)*9.81*(R-abs(zBarTotal1)))
+NetTorque2=(massBody+50+MassHead)*9.81*abs(xBarTotal2)-0.25*((massBody+50+MassHead)*9.81*abs(R-abs(zBarTotal2)))
 
