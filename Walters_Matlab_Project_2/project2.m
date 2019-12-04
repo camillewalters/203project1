@@ -26,11 +26,14 @@ hold on
 fsurf(-z);
 hold on
 z=sqrt(x^2+y^2)*tan(PHI*pi/180);
-fsurf(z+R-D-(sqrt(R^2-(R-D)^2)*tan(PHI*pi/180)));%-C1
+fsurf(z+R-D-(sqrt(R^2-(R-D)^2)*tan(PHI*pi/180)));
 UL=H*tan(PHI*pi/180);
 zlim([-R H*tan(PHI*pi/180)+R-D-(sqrt(R^2-(R-D)^2)*tan(PHI*pi/180))]);
 hold on;
-
+title("Case 2")
+xlabel("X")
+ylabel("Y")
+zlabel("Z")
 
 
 syms r theta z real
@@ -69,7 +72,7 @@ Vtotal=volBody+volHead+volNeck-volSock
 
 %part 2
 
-%mass of head
+
 
 density=250+14*(cos(theta-pi/2)-sin(theta));
 
@@ -94,7 +97,7 @@ massBody=volBody*325;
 % zBarBody1=-0.1*50/(massBody+50)
 % xBarTotal1=(xBarBody1*(massBody+50))/(massBody+50+MassHead)
 % zBarTotal1=(zBarBody1*(massBody+50)+zBar*MassHead)/(massBody+50+MassHead)
-% % 
+
 %Case 2 (ensure that case 2 values are uncommented above)
 xBarBody2=-0.375*50/(massBody+50)
 zBarBody2=-0.125*50/(massBody+50)
